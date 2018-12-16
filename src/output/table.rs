@@ -64,6 +64,8 @@ impl Columns {
 
         columns.push(Column::FileSize);
 
+        columns.push(Column::Items);
+
         if self.blocks {
             columns.push(Column::Blocks);
         }
@@ -100,6 +102,7 @@ impl Columns {
 pub enum Column {
     Permissions,
     FileSize,
+    Items,
     Timestamp(TimeType),
     Blocks,
     User,
@@ -136,6 +139,7 @@ impl Column {
         match *self {
             Column::Permissions   => "Permissions",
             Column::FileSize      => "Size",
+            Column::Items         => "Items",
             Column::Timestamp(t)  => t.header(),
             Column::Blocks        => "Blocks",
             Column::User          => "User",
@@ -334,6 +338,7 @@ impl<'a, 'f> Table<'a> {
         match *column {
             Column::Permissions    => self.permissions_plus(file, xattrs).render(self.colours),
             Column::FileSize       => file.size().render(self.colours, self.size_format, &self.env.numeric),
+            Column::Items          => file.items().render(self.colours.items),
             Column::HardLinks      => file.links().render(self.colours, &self.env.numeric),
             Column::Inode          => file.inode().render(self.colours.inode),
             Column::Blocks         => file.blocks().render(self.colours),

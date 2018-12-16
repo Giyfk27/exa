@@ -24,6 +24,7 @@ pub struct Colours {
     pub inode:        Style,
     pub blocks:       Style,
     pub header:       Style,
+    pub items:        Style,
 
     pub symlink_path:         Style,
     pub control_char:         Style,
@@ -78,6 +79,11 @@ pub struct Size {
     pub scale_mega: Style,
     pub scale_giga: Style,
     pub scale_huge: Style,
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Items {
+    numbers: Style,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]
@@ -186,6 +192,7 @@ impl Colours {
             inode:        Purple.normal(),
             blocks:       Cyan.normal(),
             header:       Style::default().underline(),
+            items:        Cyan.normal(),
 
             symlink_path:         Cyan.normal(),
             control_char:         Red.normal(),

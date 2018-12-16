@@ -34,7 +34,6 @@ pub type time_t = i64;
 /// The type of a file’s user ID.
 pub type uid_t = u32;
 
-
 /// The file’s base type, which gets displayed in the very first column of the
 /// details output.
 ///
@@ -153,6 +152,14 @@ pub enum Size {
     /// This is what ls does as well. Without it, the devices will just have
     /// file sizes of zero.
     DeviceIDs(DeviceIDs),
+}
+
+pub enum Items {
+    /// This directory has items.
+    Some(u64),
+
+    /// This directory has no items.
+    None,
 }
 
 /// The major and minor device IDs that gets displayed for device files.

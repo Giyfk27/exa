@@ -22,6 +22,8 @@ pub use self::permissions::Colours as PermissionsColours;
 mod size;
 pub use self::size::Colours as SizeColours;
 
+mod items;
+
 mod times;
 // times does too
 

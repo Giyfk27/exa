@@ -390,6 +390,35 @@ impl<'dir> File<'dir> {
     pub fn name_is_one_of(&self, choices: &[&str]) -> bool {
         choices.contains(&&self.name[..])
     }
+
+    /// This directory’s item number.
+    ///
+    /// For files, no item is given. Although they do have a size on
+    /// some filesystems, I’ve never looked at one of those numbers and gained
+    /// any information from it. So it’s going to be hidden instead.
+    ///
+    /// Block and character devices return their device IDs, because they
+    /// usually just have a file size of zero.
+    pub fn items(&self) -> f::Items {
+        let mut items = 0;
+        if self.is_directory() {
+            if let Ok(entries) = fs::read_dir(self.path.as_path()) {
+                for entry in entries {
+                    if let Ok(entry) = entry {
+                        if let Ok(file_type) = entry.file_type() {
+                            if file_type.is_file() {
+                                items += 1;
+                            }
+                        }
+                    }
+                }
+
+                return f::Items::Some(items);
+            } 
+        }
+        
+        f::Items::None
+    }
 }
 
 
