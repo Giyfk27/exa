@@ -217,8 +217,9 @@ impl Columns {
         let group  = matches.has(&flags::GROUP)?;
         let inode  = matches.has(&flags::INODE)?;
         let links  = matches.has(&flags::LINKS)?;
+        let items  = matches.has(&flags::ITEMS)?;
 
-        Ok(Columns { time_types, git, blocks, group, inode, links })
+        Ok(Columns { time_types, git, blocks, group, inode, links, items })
     }
 }
 

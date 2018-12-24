@@ -156,7 +156,7 @@ pub enum Size {
 
 pub enum Items {
     /// This directory has items.
-    Some(u64),
+    Some(usize),
 
     /// This directory has no items.
     None,

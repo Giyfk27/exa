@@ -46,6 +46,7 @@ pub struct Columns {
     pub blocks: bool,
     pub group: bool,
     pub git: bool,
+    pub items: bool,
 }
 
 impl Columns {
@@ -64,7 +65,9 @@ impl Columns {
 
         columns.push(Column::FileSize);
 
-        columns.push(Column::Items);
+        if self.items {
+            columns.push(Column::Items);
+        }
 
         if self.blocks {
             columns.push(Column::Blocks);

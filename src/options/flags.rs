@@ -50,6 +50,7 @@ pub static CREATED:    Arg = Arg { short: Some(b'U'), long: "created",    takes_
 pub static TIME_STYLE: Arg = Arg { short: None,       long: "time-style", takes_value: TakesValue::Necessary(Some(TIME_STYLES)) };
 const TIMES: Values = &["modified", "accessed", "created"];
 const TIME_STYLES: Values = &["default", "long-iso", "full-iso", "iso"];
+pub static ITEMS:      Arg = Arg { short: Some(b'c'), long: "items",      takes_value: TakesValue::Forbidden };
 
 // optional feature options
 pub static GIT:       Arg = Arg { short: None,       long: "git",      takes_value: TakesValue::Forbidden };
@@ -66,7 +67,7 @@ pub static ALL_ARGS: Args = Args(&[
     &IGNORE_GLOB, &GIT_IGNORE, &ONLY_DIRS,
 
     &BINARY, &BYTES, &GROUP, &HEADER, &INODE, &LINKS, &MODIFIED, &BLOCKS,
-    &TIME, &ACCESSED, &CREATED, &TIME_STYLE,
+    &TIME, &ACCESSED, &CREATED, &TIME_STYLE, &ITEMS,
 
     &GIT, &EXTENDED,
 ]);

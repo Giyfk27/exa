@@ -400,24 +400,16 @@ impl<'dir> File<'dir> {
     /// Block and character devices return their device IDs, because they
     /// usually just have a file size of zero.
     pub fn items(&self) -> f::Items {
-        let mut items = 0;
-        if self.is_directory() {
-            if let Ok(entries) = fs::read_dir(self.path.as_path()) {
-                for entry in entries {
-                    if let Ok(entry) = entry {
-                        if let Ok(file_type) = entry.file_type() {
-                            if file_type.is_file() {
-                                items += 1;
-                            }
-                        }
-                    }
-                }
+        use fs::dir::DotFilter;
 
-                return f::Items::Some(items);
-            } 
+        if self.is_directory() {
+            let dir = self.to_dir().unwrap();
+            let files = dir.files(DotFilter::JustFiles, None);
+            return f::Items::Some(files.count());
         }
-        
-        f::Items::None
+        else {
+            return f::Items::None;
+        }
     }
 }
 
